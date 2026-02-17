@@ -179,6 +179,11 @@
             margin-top: 0.5rem;
         }
         
+        .exp-description li {
+            margin-bottom: 0.5rem;
+            margin-left: 1.25rem;
+        }
+        
         /* Skills */
         .skills-grid {
             display: flex;
@@ -198,6 +203,11 @@
         /* Education */
         .education-item {
             padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .education-item:last-child {
+            border-bottom: none;
         }
         
         .edu-title {
@@ -231,6 +241,12 @@
         .pub-venue {
             color: var(--text-light);
             font-size: 0.9rem;
+        }
+        
+        .pub-authors {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-style: italic;
         }
         
         /* Contact */
@@ -306,12 +322,12 @@
         <h2>About</h2>
         <div class="about">
             <p>
-                I architect distributed systems at the intersection of physics-based sensor processing and machine learning infrastructure. 
-                Currently at Oracle, I work on the HeatWave ML team, building large-scale distributed machine learning systems that process billions of data points.
+                I architect distributed systems and machine learning infrastructure at the intersection of physics-based signal processing and scalable ML systems. 
+                Currently at Oracle, I work on HeatWave ML, building high-performance ML pipelines that serve billions of data points across OCI.
             </p>
             <p style="margin-top: 1rem;">
-                With a Ph.D. in Electrical Engineering (Radar Signal Processing) from the University of Oklahoma, 
-                I bring a unique perspective combining deep technical expertise in signal processing, distributed computing, and ML systems.
+                With a Ph.D. in Electrical Engineering from the University of Oklahoma and industry experience at Walmart, 
+                I bring deep expertise in distributed computing, signal processing, and production ML systems.
             </p>
         </div>
     </section>
@@ -325,25 +341,47 @@
                     <div class="exp-title">Principal Member of Technical Staff</div>
                     <div class="exp-company">Oracle | HeatWave ML Infrastructure</div>
                 </div>
-                <div class="exp-date">Present</div>
+                <div class="exp-date">Oct 2018 – Present</div>
             </div>
             <div class="exp-description">
-                Building next-generation ML infrastructure for Oracle's HeatWave analytics engine. 
-                Architected distributed systems handling 200+ node Dask clusters for ML workloads.
+                <ul>
+                    <li>Developing Oracle AutoML on MySQL-as-a-service high-performance platform (HeatWave-ML) on OCI.</li>
+                    <li>Developed an AutoML package released as part of OCI Data Science Platform.</li>
+                    <li>Invented an adaptive sampling algorithm to speed up AutoML pipeline 2x+ with negligible performance loss (Patent Pending).</li>
+                </ul>
             </div>
         </div>
         
         <div class="experience-item">
             <div class="exp-header">
                 <div>
-                    <div class="exp-title">Senior Software Engineer</div>
-                    <div class="exp-company">Oracle</div>
+                    <div class="exp-title">Senior Statistical Analyst / Data Scientist</div>
+                    <div class="exp-company">Walmart</div>
                 </div>
-                <div class="exp-date">Earlier</div>
+                <div class="exp-date">Jul 2017 – Sep 2018</div>
             </div>
             <div class="exp-description">
-                Developed Zero-Copy TCP protocols for FedRAMP-compliant ML data transfer. 
-                Published at VLDB. US Patent holder.
+                <ul>
+                    <li>Developed a machine learning-based hiring helper tool for management teams to make better hiring and promotion decisions.</li>
+                    <li>Significantly reduced time-to-fill positions by helping managers quickly identify the best talent from candidates.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="experience-item">
+            <div class="exp-header">
+                <div>
+                    <div class="exp-title">Research Assistant</div>
+                    <div class="exp-company">University of Oklahoma</div>
+                </div>
+                <div class="exp-date">Aug 2012 – Jun 2017</div>
+            </div>
+            <div class="exp-description">
+                <ul>
+                    <li>Developed parallel algorithms for complex radar signal processing running on GPGPUs.</li>
+                    <li>Developed super-resolution algorithms to reduce clutter and artifacts in radar imaging.</li>
+                    <li>Invented a novel deep learning algorithm to detect mid-air turbulence using real-time weather measurements from Hong Kong International Airport.</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -355,11 +393,12 @@
             <span class="skill-tag">Distributed Systems</span>
             <span class="skill-tag">Machine Learning</span>
             <span class="skill-tag">ML Infrastructure</span>
+            <span class="skill-tag">AutoML</span>
             <span class="skill-tag">Dask</span>
-            <span class="skill-tag">Ray</span>
-            <span class="skill-tag">Data Pipelines</span>
+            <span class="skill-tag">Oracle HeatWave</span>
             <span class="skill-tag">Radar Signal Processing</span>
-            <span class="skill-tag">SQL/ Databases</span>
+            <span class="skill-tag">Deep Learning</span>
+            <span class="skill-tag">GPGPU</span>
             <span class="skill-tag">Cloud Architecture</span>
         </div>
     </section>
@@ -370,33 +409,36 @@
         <div class="education-item">
             <div class="edu-title">Ph.D. in Electrical Engineering</div>
             <div class="edu-school">University of Oklahoma</div>
-            <div class="edu-date">2019</div>
+            <div class="edu-date">2017</div>
             <p style="color: var(--text-light); margin-top: 0.5rem;">Focus: Radar Signal Processing</p>
         </div>
         
         <div class="education-item">
-            <div class="edu-title">Bachelor in Electrical Engineering</div>
-            <div class="edu-school">University of Oklahoma</div>
-            <div class="edu-date">2014</div>
+            <div class="edu-title">B.Eng in Electronics and Information Engineering</div>
+            <div class="edu-school">Sichuan University, China</div>
+            <div class="edu-date">2012</div>
         </div>
     </section>
 
     <section class="container">
-        <h2>Publications & Research</h2>
+        <h2>Publications</h2>
         
         <div class="pub-item">
             <div class="pub-title">Oracle AutoML: A Fast and Predictive AutoML Pipeline</div>
-            <div class="pub-venue">VLDB 2020 | with Oracle Research</div>
+            <div class="pub-authors">A Yakovlev, HF Moghadam, A Moharrer, J Cai, et al.</div>
+            <div class="pub-venue">Proceedings of the VLDB Endowment, 2020</div>
         </div>
         
         <div class="pub-item">
-            <div class="pub-title">Distributed Space Resource Logistics Architecture Optimization</div>
-            <div class="pub-venue">Journal of Spacecraft and Rockets</div>
+            <div class="pub-title">Diagnose and Classification of Typhoon-Associated Low-Altitude Turbulence Using HKO-TDWR Radar Observations and Machine Intelligence</div>
+            <div class="pub-authors">J Cai, Y Zhang, RJ Doviak, Y Shrestha, PW Chan</div>
+            <div class="pub-venue">IEEE Transactions on Geoscience and Remote Sensing, 2019</div>
         </div>
         
         <div class="pub-item">
-            <div class="pub-title">Ph.D. Dissertation: Advanced Radar Signal Processing Techniques</div>
-            <div class="pub-venue">University of Oklahoma, 2017</div>
+            <div class="pub-title">General Purpose Graphic Processing Unit Implementation of Adaptive Pulse Compression Algorithms</div>
+            <div class="pub-authors">J Cai, Y Zhang</div>
+            <div class="pub-venue">Journal of Applied Remote Sensing, 2017</div>
         </div>
     </section>
 
