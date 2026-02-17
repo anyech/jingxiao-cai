@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jingxiao Cai, Ph.D. | Distributed Systems & ML Infrastructure</title>
-    <meta name="description" content="Principal Member of Technical Staff at Oracle, specializing in distributed systems and ML infrastructure.">
+    <title>Jingxiao Cai, Ph.D. | Principal ML Infrastructure Architect</title>
+    <meta name="description" content="Principal Architect at Oracle, specializing in distributed ML infrastructure, radar signal processing, and real-time systems.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -169,6 +169,11 @@
             font-weight: 500;
         }
         
+        .exp-location {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+        
         .exp-date {
             color: var(--text-light);
             font-size: 0.9rem;
@@ -249,6 +254,25 @@
             font-style: italic;
         }
         
+        /* Patents */
+        .patent-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .patent-item:last-child {
+            border-bottom: none;
+        }
+        
+        .patent-title {
+            font-weight: 600;
+        }
+        
+        .patent-number {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
         /* Contact */
         .contact-grid {
             display: grid;
@@ -306,8 +330,8 @@
                 <div class="avatar">JC</div>
                 <div class="hero-content">
                     <h1>Jingxiao Cai, Ph.D.</h1>
-                    <div class="title">Principal Member of Technical Staff @ Oracle</div>
-                    <div class="location">📍 Fremont, CA (San Francisco Bay Area)</div>
+                    <div class="title">Principal Architect, Distributed ML Infrastructure</div>
+                    <div class="location">📍 Fremont, CA (San Francisco Bay Area) • U.S. Permanent Resident</div>
                     <div class="links">
                         <a href="https://www.linkedin.com/in/jingxiaocai/" target="_blank">LinkedIn</a>
                         <a href="https://github.com/anyech" target="_blank">GitHub</a>
@@ -322,12 +346,12 @@
         <h2>About</h2>
         <div class="about">
             <p>
-                I architect distributed systems and machine learning infrastructure at the intersection of physics-based signal processing and scalable ML systems. 
-                Currently at Oracle, I work on HeatWave ML, building high-performance ML pipelines that serve billions of data points across OCI.
+                Principal Architect specializing in distributed systems and ML infrastructure. 
+                PhD in Radar Signal Processing with 8+ years building 0-to-1 platforms—most recently architecting Oracle's MySQL HeatWave GenAI/AutoML infrastructure.
             </p>
             <p style="margin-top: 1rem;">
-                With a Ph.D. in Electrical Engineering from the University of Oklahoma and industry experience at Walmart, 
-                I bring deep expertise in distributed computing, signal processing, and production ML systems.
+                Expert in "always-on" Dask clusters (200+ nodes), FedRAMP-compliant secure protocols, 
+                and bridging physics-based sensor data with scalable machine learning. Ideal for roles in distributed AI infrastructure, foundation models, or autonomous systems.
             </p>
         </div>
     </section>
@@ -338,16 +362,19 @@
         <div class="experience-item">
             <div class="exp-header">
                 <div>
-                    <div class="exp-title">Principal Member of Technical Staff</div>
-                    <div class="exp-company">Oracle | HeatWave ML Infrastructure</div>
+                    <div class="exp-title">Principal Architect, Distributed ML Infrastructure (IC-4)</div>
+                    <div class="exp-company">Oracle | MySQL HeatWave AutoML/GenAI</div>
+                    <div class="exp-location">Redwood City, CA</div>
                 </div>
                 <div class="exp-date">Oct 2018 – Present</div>
             </div>
             <div class="exp-description">
                 <ul>
-                    <li>Developing Oracle AutoML on MySQL-as-a-service high-performance platform (HeatWave-ML) on OCI.</li>
-                    <li>Developed an AutoML package released as part of OCI Data Science Platform.</li>
-                    <li>Invented an adaptive sampling algorithm to speed up AutoML pipeline 2x+ with negligible performance loss (Patent Pending).</li>
+                    <li>Architected 0-to-1 distributed platform for AutoML and GenAI—enabling unstructured data ingestion (object storage → vectors/text/images) for RAG and multimodal LLMs.</li>
+                    <li>Designed custom "always-on" Dask orchestration with dynamic lifecycle management, concurrency controls (ForkingTCPServer/semaphore), scaling across 200+ nodes.</li>
+                    <li>Developed proprietary FedRAMP/FIPS-compliant secure TCP protocol with custom framing, BLOB hashing, progress tracking for low-latency DB kernel ↔ ML driver coordination.</li>
+                    <li>Resolved hybrid workload contention—reduced idle memory ~66% (9GB → 3GB), eliminated OOM errors.</li>
+                    <li>Optimized large tensor buffers for efficient transfer in image/multimodal LLM workloads.</li>
                 </ul>
             </div>
         </div>
@@ -355,15 +382,16 @@
         <div class="experience-item">
             <div class="exp-header">
                 <div>
-                    <div class="exp-title">Senior Statistical Analyst / Data Scientist</div>
+                    <div class="exp-title">Data Scientist → Senior Statistical Analyst</div>
                     <div class="exp-company">Walmart</div>
+                    <div class="exp-location">Bentonville, AR</div>
                 </div>
                 <div class="exp-date">Jul 2017 – Sep 2018</div>
             </div>
             <div class="exp-description">
                 <ul>
-                    <li>Developed a machine learning-based hiring helper tool for management teams to make better hiring and promotion decisions.</li>
-                    <li>Significantly reduced time-to-fill positions by helping managers quickly identify the best talent from candidates.</li>
+                    <li>Built talent recommendation engine using Random Forest to optimize hiring for Store/Assistant Managers, reducing vacancy impact.</li>
+                    <li>Created internal wiki on data science techniques (RegEx, imputation, Linux scripting).</li>
                 </ul>
             </div>
         </div>
@@ -371,16 +399,17 @@
         <div class="experience-item">
             <div class="exp-header">
                 <div>
-                    <div class="exp-title">Research Assistant</div>
+                    <div class="exp-title">Graduate Student Research Assistant</div>
                     <div class="exp-company">University of Oklahoma</div>
+                    <div class="exp-location">Norman, OK</div>
                 </div>
                 <div class="exp-date">Aug 2012 – Jun 2017</div>
             </div>
             <div class="exp-description">
                 <ul>
-                    <li>Developed parallel algorithms for complex radar signal processing running on GPGPUs.</li>
-                    <li>Developed super-resolution algorithms to reduce clutter and artifacts in radar imaging.</li>
-                    <li>Invented a novel deep learning algorithm to detect mid-air turbulence using real-time weather measurements from Hong Kong International Airport.</li>
+                    <li>Developed ML algorithms (ANN/Random Forest) for radar turbulence detection in collaboration with Hong Kong Observatory.</li>
+                    <li>Optimized GPU-parallelized radar algorithms (Super-Resolution, Pulse Compression) on Nvidia Jetson.</li>
+                    <li>Implemented target tracking for wind turbine clutters.</li>
                 </ul>
             </div>
         </div>
@@ -389,17 +418,19 @@
     <section class="container">
         <h2>Skills</h2>
         <div class="skills-grid">
-            <span class="skill-tag">Python</span>
             <span class="skill-tag">Distributed Systems</span>
-            <span class="skill-tag">Machine Learning</span>
             <span class="skill-tag">ML Infrastructure</span>
-            <span class="skill-tag">AutoML</span>
+            <span class="skill-tag">Real-Time Signal Processing</span>
+            <span class="skill-tag">Radar Signal Processing</span>
+            <span class="skill-tag">C++</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">SQL</span>
             <span class="skill-tag">Dask</span>
             <span class="skill-tag">Oracle HeatWave</span>
-            <span class="skill-tag">Radar Signal Processing</span>
-            <span class="skill-tag">Deep Learning</span>
+            <span class="skill-tag">NVIDIA CUDA</span>
+            <span class="skill-tag">ONNX</span>
+            <span class="skill-tag">Phased-Array Beamforming</span>
             <span class="skill-tag">GPGPU</span>
-            <span class="skill-tag">Cloud Architecture</span>
         </div>
     </section>
 
@@ -409,8 +440,8 @@
         <div class="education-item">
             <div class="edu-title">Ph.D. in Electrical Engineering</div>
             <div class="edu-school">University of Oklahoma</div>
-            <div class="edu-date">2017</div>
-            <p style="color: var(--text-light); margin-top: 0.5rem;">Focus: Radar Signal Processing</p>
+            <div class="edu-date">Dec 2017</div>
+            <p style="color: var(--text-light); margin-top: 0.5rem;">Focus: Radar Signal Processing, GPU-accelerated signal processing</p>
         </div>
         
         <div class="education-item">
@@ -426,7 +457,7 @@
         <div class="pub-item">
             <div class="pub-title">Oracle AutoML: A Fast and Predictive AutoML Pipeline</div>
             <div class="pub-authors">A Yakovlev, HF Moghadam, A Moharrer, J Cai, et al.</div>
-            <div class="pub-venue">Proceedings of the VLDB Endowment, 2020</div>
+            <div class="pub-venue">VLDB Endowment, 2020</div>
         </div>
         
         <div class="pub-item">
@@ -439,6 +470,21 @@
             <div class="pub-title">General Purpose Graphic Processing Unit Implementation of Adaptive Pulse Compression Algorithms</div>
             <div class="pub-authors">J Cai, Y Zhang</div>
             <div class="pub-venue">Journal of Applied Remote Sensing, 2017</div>
+        </div>
+        
+        <div class="pub-item">
+            <div class="pub-title">Micro-Doppler Radar Signature Identification within Wind Turbine Clutter Based on Short-CPI Airborne Radar</div>
+            <div class="pub-authors">J Cai, et al.</div>
+            <div class="pub-venue">IET Radar, Sonar & Navigation, 2015</div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2>Patents</h2>
+        
+        <div class="patent-item">
+            <div class="patent-title">Adaptive Sampling for Imbalance Mitigation and Dataset Size Reduction in Machine Learning</div>
+            <div class="patent-number">US20200342265A1 (Patent Pending)</div>
         </div>
     </section>
 
