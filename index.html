@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jingxiao Cai, Ph.D. | Distributed Systems & ML Infrastructure</title>
+    <meta name="description" content="Principal Member of Technical Staff at Oracle, specializing in distributed systems and ML infrastructure.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --bg: #ffffff;
+            --bg-alt: #f8fafc;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Header */
+        header {
+            padding: 4rem 0 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .hero {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+        
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), #818cf8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .hero-content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero-content .title {
+            font-size: 1.25rem;
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero-content .location {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        
+        .links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-alt);
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .links a:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Sections */
+        section {
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        section:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 1.5rem;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        /* About */
+        .about p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            max-width: 700px;
+        }
+        
+        /* Experience */
+        .experience-item {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .experience-item:last-child {
+            border-bottom: none;
+        }
+        
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+        
+        .exp-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .exp-company {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .exp-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .exp-description {
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+        
+        /* Skills */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        
+        .skill-tag {
+            padding: 0.5rem 1rem;
+            background: var(--bg-alt);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+        
+        /* Education */
+        .education-item {
+            padding: 1rem 0;
+        }
+        
+        .edu-title {
+            font-weight: 600;
+        }
+        
+        .edu-school {
+            color: var(--primary);
+        }
+        
+        .edu-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Publications */
+        .pub-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .pub-item:last-child {
+            border-bottom: none;
+        }
+        
+        .pub-title {
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .pub-venue {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .contact-item {
+            padding: 1rem;
+            background: var(--bg-alt);
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .contact-item a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 600px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+            
+            .links {
+                justify-content: center;
+            }
+            
+            .exp-header {
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="hero">
+                <div class="avatar">JC</div>
+                <div class="hero-content">
+                    <h1>Jingxiao Cai, Ph.D.</h1>
+                    <div class="title">Principal Member of Technical Staff @ Oracle</div>
+                    <div class="location">📍 Fremont, CA (San Francisco Bay Area)</div>
+                    <div class="links">
+                        <a href="https://www.linkedin.com/in/jingxiaocai/" target="_blank">LinkedIn</a>
+                        <a href="https://github.com/anyech" target="_blank">GitHub</a>
+                        <a href="mailto:anyech@gmail.com">Email</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="container">
+        <h2>About</h2>
+        <div class="about">
+            <p>
+                I architect distributed systems at the intersection of physics-based sensor processing and machine learning infrastructure. 
+                Currently at Oracle, I work on the HeatWave ML team, building large-scale distributed machine learning systems that process billions of data points.
+            </p>
+            <p style="margin-top: 1rem;">
+                With a Ph.D. in Electrical Engineering (Radar Signal Processing) from the University of Oklahoma, 
+                I bring a unique perspective combining deep technical expertise in signal processing, distributed computing, and ML systems.
+            </p>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2>Experience</h2>
+        
+        <div class="experience-item">
+            <div class="exp-header">
+                <div>
+                    <div class="exp-title">Principal Member of Technical Staff</div>
+                    <div class="exp-company">Oracle | HeatWave ML Infrastructure</div>
+                </div>
+                <div class="exp-date">Present</div>
+            </div>
+            <div class="exp-description">
+                Building next-generation ML infrastructure for Oracle's HeatWave analytics engine. 
+                Architected distributed systems handling 200+ node Dask clusters for ML workloads.
+            </div>
+        </div>
+        
+        <div class="experience-item">
+            <div class="exp-header">
+                <div>
+                    <div class="exp-title">Senior Software Engineer</div>
+                    <div class="exp-company">Oracle</div>
+                </div>
+                <div class="exp-date">Earlier</div>
+            </div>
+            <div class="exp-description">
+                Developed Zero-Copy TCP protocols for FedRAMP-compliant ML data transfer. 
+                Published at VLDB. US Patent holder.
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Distributed Systems</span>
+            <span class="skill-tag">Machine Learning</span>
+            <span class="skill-tag">ML Infrastructure</span>
+            <span class="skill-tag">Dask</span>
+            <span class="skill-tag">Ray</span>
+            <span class="skill-tag">Data Pipelines</span>
+            <span class="skill-tag">Radar Signal Processing</span>
+            <span class="skill-tag">SQL/ Databases</span>
+            <span class="skill-tag">Cloud Architecture</span>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2>Education</h2>
+        
+        <div class="education-item">
+            <div class="edu-title">Ph.D. in Electrical Engineering</div>
+            <div class="edu-school">University of Oklahoma</div>
+            <div class="edu-date">2019</div>
+            <p style="color: var(--text-light); margin-top: 0.5rem;">Focus: Radar Signal Processing</p>
+        </div>
+        
+        <div class="education-item">
+            <div class="edu-title">Bachelor in Electrical Engineering</div>
+            <div class="edu-school">University of Oklahoma</div>
+            <div class="edu-date">2014</div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2>Publications & Research</h2>
+        
+        <div class="pub-item">
+            <div class="pub-title">Oracle AutoML: A Fast and Predictive AutoML Pipeline</div>
+            <div class="pub-venue">VLDB 2020 | with Oracle Research</div>
+        </div>
+        
+        <div class="pub-item">
+            <div class="pub-title">Distributed Space Resource Logistics Architecture Optimization</div>
+            <div class="pub-venue">Journal of Spacecraft and Rockets</div>
+        </div>
+        
+        <div class="pub-item">
+            <div class="pub-title">Ph.D. Dissertation: Advanced Radar Signal Processing Techniques</div>
+            <div class="pub-venue">University of Oklahoma, 2017</div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2>Contact</h2>
+        <div class="contact-grid">
+            <div class="contact-item">
+                <div>📧 Email</div>
+                <a href="mailto:anyech@gmail.com">anyech@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                <div>💼 LinkedIn</div>
+                <a href="https://www.linkedin.com/in/jingxiaocai/">linkedin.com/in/jingxiaocai</a>
+            </div>
+            <div class="contact-item">
+                <div>🐙 GitHub</div>
+                <a href="https://github.com/anyech">github.com/anyech</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Jingxiao Cai. Built with care.</p>
+        </div>
+    </footer>
+</body>
+</html>
