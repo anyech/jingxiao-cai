@@ -331,7 +331,7 @@
                 <div class="hero-content">
                     <h1>Jingxiao Cai, Ph.D.</h1>
                     <div class="title">Principal ML Infrastructure Architect</div>
-                    <div class="location">📍 Fremont, CA (San Francisco Bay Area) • U.S. Permanent Resident</div>
+                    <div class="location">📍 Fremont, CA (San Francisco Bay Area)</div>
                     <div class="links">
                         <a href="https://www.linkedin.com/in/jingxiaocai/" target="_blank">LinkedIn</a>
                         <a href="https://github.com/anyech" target="_blank">GitHub</a>
@@ -348,12 +348,20 @@
         <h2>About</h2>
         <div class="about">
             <p>
-                Principal ML infrastructure architect specializing in deterministic, resource-constrained distributed systems for machine learning and physical-world data.
-                PhD in Radar Signal Processing with 8+ years building 0-to-1 platforms—most recently helping architect Oracle's MySQL HeatWave AutoML/GenAI infrastructure.
+                Principal ML infrastructure architect specializing in deterministic, resource-constrained distributed systems for machine learning and physical-world data. PhD in Radar Signal Processing with 8+ years building greenfield platforms, most recently architecting Oracle's MySQL HeatWave AutoML and GenAI infrastructure. My work spans custom orchestration, secure low-latency DB ↔ ML transport, and memory/data-movement optimization that reduced idle memory footprint by 66% (9GB → 3GB) and eliminated recurring OOM failures. Published at VLDB (2020) and inventor on a granted U.S. patent.
             </p>
-            <p style="margin-top: 1rem;">
-                Experience spans custom orchestration, secure low-latency coordination between database and ML layers, and memory/data-movement optimization that reduced idle memory footprint from 9GB to 3GB and eliminated recurring OOMs. Strong fit for distributed AI infrastructure, robotics, autonomous systems, and real-time intelligent platforms.
-            </p>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2>Selected Highlights</h2>
+        <div class="skills-grid">
+            <span class="skill-tag">66% memory reduction (9GB → 3GB)</span>
+            <span class="skill-tag">200+ node ML orchestration</span>
+            <span class="skill-tag">100+ node GenAI readiness</span>
+            <span class="skill-tag">FedRAMP/FIPS transport design</span>
+            <span class="skill-tag">VLDB 2020 publication</span>
+            <span class="skill-tag">Granted U.S. patent</span>
         </div>
     </section>
 
@@ -371,11 +379,11 @@
             </div>
             <div class="exp-description">
                 <ul>
-                    <li>Architected and led a deterministic distributed ML platform for AutoML and GenAI, enabling unstructured data ingestion and serving flows for vector, text, and image workloads.</li>
-                    <li>Designed custom orchestration with explicit lifecycle management, process isolation, and concurrency controls (ForkingTCPServer/semaphore) supporting 200+ nodes.</li>
-                    <li>Developed a custom FedRAMP/FIPS-compliant transport and control layer with framing, integrity hashing, progress tracking, and abort semantics for secure low-latency DB kernel ↔ ML driver coordination.</li>
+                    <li>Architected greenfield distributed ML infrastructure for AutoML and GenAI, enabling unstructured data ingestion and serving flows for vector, text, and image workloads.</li>
+                    <li>Designed orchestration with explicit lifecycle management, process isolation, and concurrency controls (ForkingTCPServer/semaphore) supporting 200+ node deployments.</li>
+                    <li>Developed a FedRAMP/FIPS-compliant transport and control layer with framing, integrity hashing, progress tracking, and abort semantics for secure low-latency DB kernel ↔ ML driver coordination.</li>
                     <li>Diagnosed and resolved systemic resource contention in hybrid DB/ML workloads, reducing idle memory footprint ~66% (9GB → 3GB) and eliminating recurring OOM failures.</li>
-                    <li>Served as a primary ML infrastructure owner for production hardening, incident RCA, and scale-readiness work for large GenAI deployments.</li>
+                    <li>Owned production hardening, incident RCA, and scale-readiness for GenAI launches, including validation for 100+ node deployments.</li>
                 </ul>
             </div>
         </div>
@@ -428,11 +436,9 @@
             <span class="skill-tag">SQL</span>
             <span class="skill-tag">Concurrency &amp; Process Isolation</span>
             <span class="skill-tag">Secure Protocol Design</span>
+            <span class="skill-tag">FedRAMP / FIPS</span>
             <span class="skill-tag">Dask</span>
-            <span class="skill-tag">Oracle HeatWave</span>
             <span class="skill-tag">NVIDIA CUDA</span>
-            <span class="skill-tag">ONNX</span>
-            <span class="skill-tag">Phased-Array Beamforming</span>
         </div>
     </section>
 
@@ -509,32 +515,6 @@
     </section>
 
     <section class="container">
-        <h2>Selected Platforms & Systems</h2>
-        
-        <div class="pub-item">
-            <div class="pub-title">Distributed ML Control Plane</div>
-            <div class="pub-venue">Custom orchestration, lifecycle management, and process-isolated execution for AutoML / GenAI workloads in a database-centric environment.</div>
-        </div>
-        
-        <div class="pub-item">
-            <div class="pub-title">Secure DB ↔ ML Transport Layer</div>
-            <div class="pub-venue">FedRAMP/FIPS-compliant coordination layer with framing, integrity checks, progress reporting, and safe abort semantics for low-latency control flow.</div>
-        </div>
-        
-        <div class="pub-item">
-            <div class="pub-title">MySQL HeatWave GenAI & Vector Store</div>
-            <div class="pub-venue">In-database LLM integration with RAG, vector embeddings, and document storage.</div>
-            <div class="pub-venue"><a href="https://www.oracle.com/heatwave/genai/" target="_blank" style="color: var(--primary);">Product overview</a></div>
-        </div>
-        
-        <div class="pub-item">
-            <div class="pub-title">Oracle AutoML Pipeline</div>
-            <div class="pub-venue">Automated ML workflow selection, hyperparameter tuning, and model selection, published at VLDB 2020.</div>
-            <div class="pub-venue"><a href="https://blogs.oracle.com/mysql/heatwave-for-mysql-technical-deep-dive" target="_blank" style="color: var(--primary);">Technical deep dive</a></div>
-        </div>
-    </section>
-
-    <section class="container">
         <h2>Contact</h2>
         <div class="contact-grid">
             <div class="contact-item">
@@ -552,6 +532,10 @@
             <div class="contact-item">
                 <div>🎓 Google Scholar</div>
                 <a href="https://scholar.google.com/citations?user=pyxQPtAAAAAJ&hl=en">scholar.google.com</a>
+            </div>
+            <div class="contact-item">
+                <div>🛂 Work Authorization</div>
+                <div style="margin-top: 0.25rem; color: var(--text-light); font-weight: 500;">U.S. Permanent Resident</div>
             </div>
         </div>
     </section>
