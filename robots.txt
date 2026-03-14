@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://anyech.github.io/jingxiao-cai/sitemap.xml
