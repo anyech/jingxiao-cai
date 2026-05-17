@@ -137,13 +137,31 @@ def build_section(prs: list[dict[str, str | int]]) -> str:
 
 def update_index(prs: list[dict[str, str | int]]) -> bool:
     text = INDEX_HTML.read_text()
-    section = build_section(prs)
+    section = build_section(prs).strip("\n")
     without_old, replacements = SECTION_RE.subn("\n", text, count=1)
     if replacements != 1:
         raise RuntimeError("Expected exactly one Open Source section to replace")
     if SKILLS_MARKER not in without_old:
         raise RuntimeError("Could not find Skills section insertion point")
-    updated = without_old.replace(SKILLS_MARKER, "\n" + section.rstrip() + SKILLS_MARKER, 1)
+
+    # Keep the section after Experience and before Skills without accumulating blank lines
+    # on repeated idempotency runs.
+    without_old = re.sub(
+        r"\n{3,}(?=    <section class=\"container\">\n        <h2>Skills</h2>)",
+        "\n\n",
+        without_old,
+    )
+    updated = without_old.replace(SKILLS_MARKER, "\n" + section + SKILLS_MARKER, 1)
+    updated = re.sub(
+        r"\n{3,}(?=    <section class=\"container\">\n        <h2>Open Source</h2>)",
+        "\n\n",
+        updated,
+    )
+    updated = re.sub(
+        r"(</section>)\n{3,}(?=    <section class=\"container\">\n        <h2>Skills</h2>)",
+        r"\1\n\n",
+        updated,
+    )
     if not updated.endswith("\n"):
         updated += "\n"
     if updated == text:
