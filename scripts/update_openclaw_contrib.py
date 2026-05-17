@@ -188,17 +188,16 @@ def basic_validate() -> None:
         print(diff_check.stdout, file=sys.stderr)
 
 
-def commit_and_push() -> bool:
+def commit_and_push() -> tuple[bool, str | None]:
     status = run(["git", "status", "--short", "--", "index.html", "scripts/update_openclaw_contrib.py"]).stdout.strip()
     if not status:
-        print("No website contribution changes to commit.")
-        return False
+        return False, None
     run(["git", "add", "index.html", "scripts/update_openclaw_contrib.py"])
     msg = "Update OpenClaw contributor highlight"
     run(["git", "commit", "-m", msg])
     run(["git", "push", "origin", "main"])
-    print(msg)
-    return True
+    commit = run(["git", "rev-parse", "--short", "HEAD"]).stdout.strip()
+    return True, commit
 
 
 def main() -> int:
@@ -215,8 +214,9 @@ def main() -> int:
     changed = update_index(prs)
     basic_validate()
     pushed = False
+    commit = None
     if args.commit_push:
-        pushed = commit_and_push()
+        pushed, commit = commit_and_push()
 
     summary = {
         "ok": True,
@@ -224,6 +224,7 @@ def main() -> int:
         "latestPr": prs[0] if prs else None,
         "changed": changed,
         "pushed": pushed,
+        "commit": commit,
     }
     if args.json:
         print(json.dumps(summary, ensure_ascii=False, indent=2))
