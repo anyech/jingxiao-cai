@@ -28,6 +28,7 @@ CONTRIBUTORS_URL = "https://openclaws.io/contributors/"
 # Keep exact scopes for known PRs. Future merged PRs still show up automatically
 # using their GitHub titles until we decide to hand-polish the scope label.
 KNOWN_SCOPE = {
+    85652: "Gateway prompt-history stream-error filtering",
     80042: "Discord verbose tool progress delivery",
     76052: "topic-suffixed session locks",
     70936: "PDF.js standard fonts",
@@ -127,8 +128,8 @@ def build_section(prs: list[dict[str, str | int]]) -> str:
             </div>
             <div class="exp-description">
                 <ul>
-                    <li>Contributed {count} merged upstream {pr_word} to OpenClaw with regression coverage, focused on AI-agent runtime/delivery reliability and document extraction correctness; {selected_intro}: {selected_links}.</li>
-                    <li>Listed as <a href="{CONTRIBUTORS_URL}" target="_blank" style="color: var(--primary);">@anyech</a> on the official contributors page; work includes TypeScript runtime correctness, Discord/tool-progress delivery, PDF.js/package-layout handling, and LLM-integrated document extraction.</li>
+                    <li>Contributed {count} merged upstream {pr_word} to OpenClaw with regression coverage, focused on AI-agent gateway/runtime reliability, tool-progress delivery, and document extraction correctness; {selected_intro}: {selected_links}.</li>
+                    <li>Listed as <a href="{CONTRIBUTORS_URL}" target="_blank" style="color: var(--primary);">@anyech</a> on the official contributors page; work includes TypeScript gateway/runtime correctness, Discord/tool-progress delivery, PDF.js/package-layout handling, and LLM-integrated document extraction.</li>
                 </ul>
             </div>
         </div>
