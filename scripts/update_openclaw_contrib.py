@@ -28,6 +28,7 @@ CONTRIBUTORS_URL = "https://openclaws.io/contributors/"
 # Keep exact scopes for known PRs. Future merged PRs still show up automatically
 # using their GitHub titles until we decide to hand-polish the scope label.
 KNOWN_SCOPE = {
+    86455: "sessions_yield abort lock release",
     85652: "Gateway prompt-history stream-error filtering",
     80042: "Discord verbose tool progress delivery",
     76052: "topic-suffixed session locks",
