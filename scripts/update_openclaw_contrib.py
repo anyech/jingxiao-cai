@@ -16,6 +16,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+import time
 import urllib.parse
 import urllib.request
 
@@ -24,10 +25,15 @@ INDEX_HTML = REPO_ROOT / "index.html"
 GITHUB_REPO = "openclaw/openclaw"
 GITHUB_AUTHOR = "anyech"
 CONTRIBUTORS_URL = "https://openclaws.io/contributors/"
+SITE_URL = "https://anyech.github.io/jingxiao-cai/"
+LIVE_VERIFY_TIMEOUT_SECONDS = 120
+LIVE_VERIFY_INTERVAL_SECONDS = 10
 
-# Keep exact scopes for known PRs. Future merged PRs still show up automatically
-# using their GitHub titles until we decide to hand-polish the scope label.
+# Keep exact public-facing scopes for known PRs. Unknown future merged PRs must
+# stop automatic publishing and request review instead of falling back to raw
+# GitHub titles on the public personal site.
 KNOWN_SCOPE = {
+    92362: "single-session row metadata context",
     86455: "sessions_yield abort lock release",
     85652: "Gateway prompt-history stream-error filtering",
     80042: "Discord verbose tool progress delivery",
@@ -99,8 +105,14 @@ def fetch_merged_prs() -> list[dict[str, str | int]]:
 def pr_link(pr: dict[str, str | int]) -> str:
     number = int(pr["number"])
     url = html.escape(str(pr["url"]), quote=True)
-    label = html.escape(KNOWN_SCOPE.get(number, str(pr["title"])), quote=False)
+    if number not in KNOWN_SCOPE:
+        raise RuntimeError(f"PR #{number} is missing from KNOWN_SCOPE; refusing public auto-publish")
+    label = html.escape(KNOWN_SCOPE[number], quote=False)
     return f'<a href="{url}" target="_blank" style="color: var(--primary);">#{number}</a> ({label})'
+
+
+def unknown_scope_prs(prs: list[dict[str, str | int]]) -> list[dict[str, str | int]]:
+    return [pr for pr in prs if int(pr["number"]) not in KNOWN_SCOPE]
 
 
 def build_section(prs: list[dict[str, str | int]]) -> str:
@@ -203,6 +215,73 @@ def commit_and_push() -> tuple[bool, str | None]:
     return True, commit
 
 
+def verify_live_site(prs: list[dict[str, str | int]]) -> dict[str, object]:
+    """Fetch GitHub Pages after push and verify the refreshed section is live."""
+
+    expected_count = len(prs)
+    selected = prs[:6]
+    deadline = time.monotonic() + LIVE_VERIFY_TIMEOUT_SECONDS
+    attempts = 0
+    last_error = ""
+    last_checks: dict[str, bool] = {}
+    url = SITE_URL
+
+    while True:
+        attempts += 1
+        try:
+            req = urllib.request.Request(
+                url,
+                headers={
+                    "Accept": "text/html,application/xhtml+xml",
+                    "User-Agent": "jingxiao-cai-site-openclaw-contrib-live-verify",
+                },
+            )
+            with urllib.request.urlopen(req, timeout=15) as response:
+                status = getattr(response, "status", response.getcode())
+                body = response.read().decode("utf-8", errors="replace")
+            if status != 200:
+                raise RuntimeError(f"HTTP {status}")
+
+            selected_links_ok = all(
+                f"https://github.com/{GITHUB_REPO}/pull/{int(pr['number'])}" in body
+                for pr in selected
+            )
+            selected_scope_labels_ok = all(
+                KNOWN_SCOPE[int(pr["number"])] in body
+                for pr in selected
+            )
+            last_checks = {
+                "http_200": True,
+                "open_source_section": "<h2>Open Source</h2>" in body,
+                "expected_count": re.search(
+                    rf"Contributed\s+{expected_count}\s+merged upstream PRs?",
+                    body,
+                )
+                is not None,
+                "latest_pr_link": f"https://github.com/{GITHUB_REPO}/pull/{int(prs[0]['number'])}" in body,
+                "selected_pr_links": selected_links_ok,
+                "selected_scope_labels": selected_scope_labels_ok,
+            }
+            if all(last_checks.values()):
+                return {"ok": True, "url": url, "attempts": attempts, "checks": last_checks}
+            failed = ", ".join(name for name, ok in last_checks.items() if not ok)
+            last_error = f"failed checks: {failed}"
+        except Exception as exc:  # pragma: no cover - exercised by live cron
+            last_error = str(exc)
+            if not last_checks:
+                last_checks = {"http_200": False}
+
+        if time.monotonic() >= deadline:
+            return {
+                "ok": False,
+                "url": url,
+                "attempts": attempts,
+                "checks": last_checks,
+                "error": last_error,
+            }
+        time.sleep(LIVE_VERIFY_INTERVAL_SECONDS)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--commit-push", action="store_true", help="Commit and push if index.html changes")
@@ -214,25 +293,55 @@ def main() -> int:
         run(["git", "pull", "--ff-only", "origin", "main"])
 
     prs = fetch_merged_prs()
+    unknown = unknown_scope_prs(prs)
+    if unknown:
+        summary = {
+            "ok": True,
+            "reviewNeeded": True,
+            "reason": "unknown_pr_scope",
+            "mergedPrCount": len(prs),
+            "latestPr": prs[0] if prs else None,
+            "unknownPrs": unknown,
+            "changed": False,
+            "pushed": False,
+            "commit": None,
+            "liveVerification": None,
+        }
+        if args.json:
+            print(json.dumps(summary, ensure_ascii=False, indent=2))
+        else:
+            print(summary)
+        return 0
+
     changed = update_index(prs)
     basic_validate()
     pushed = False
     commit = None
+    live_verification = None
     if args.commit_push:
+        should_verify_existing_live = changed
         pushed, commit = commit_and_push()
+        if pushed:
+            live_verification = verify_live_site(prs)
+        elif should_verify_existing_live:
+            live_verification = verify_live_site(prs)
 
     summary = {
-        "ok": True,
+        "ok": not live_verification or bool(live_verification.get("ok")),
+        "reviewNeeded": False,
         "mergedPrCount": len(prs),
         "latestPr": prs[0] if prs else None,
         "changed": changed,
         "pushed": pushed,
         "commit": commit,
+        "liveVerification": live_verification,
     }
     if args.json:
         print(json.dumps(summary, ensure_ascii=False, indent=2))
     else:
         print(summary)
+    if live_verification and not live_verification.get("ok"):
+        return 2
     return 0
 
 
