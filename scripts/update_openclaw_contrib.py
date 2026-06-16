@@ -33,6 +33,7 @@ LIVE_VERIFY_INTERVAL_SECONDS = 10
 # stop automatic publishing and request review instead of falling back to raw
 # GitHub titles on the public personal site.
 KNOWN_SCOPE = {
+    90487: "ChatGPT/Codex Responses SSE stream hardening",
     92362: "single-session row metadata context",
     86455: "sessions_yield abort lock release",
     85652: "Gateway prompt-history stream-error filtering",
