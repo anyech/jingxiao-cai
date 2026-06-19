@@ -35,6 +35,7 @@ LIVE_VERIFY_INTERVAL_SECONDS = 10
 KNOWN_SCOPE = {
     90487: "ChatGPT/Codex Responses SSE stream hardening",
     92362: "single-session row metadata context",
+    89279: "Discord ACP thread completion delivery",
     86455: "sessions_yield abort lock release",
     85652: "Gateway prompt-history stream-error filtering",
     80042: "Discord verbose tool progress delivery",
