@@ -33,6 +33,7 @@ LIVE_VERIFY_INTERVAL_SECONDS = 10
 # stop automatic publishing and request review instead of falling back to raw
 # GitHub titles on the public personal site.
 KNOWN_SCOPE = {
+    84708: "message-tool mirror replay recovery",
     90487: "ChatGPT/Codex Responses SSE stream hardening",
     92362: "single-session row metadata context",
     89279: "Discord ACP thread completion delivery",
@@ -203,13 +204,19 @@ def basic_validate() -> None:
     diff_check = run(["git", "diff", "--check"])
     if diff_check.stdout.strip():
         print(diff_check.stdout, file=sys.stderr)
+    run([sys.executable, "scripts/test_update_openclaw_contrib.py"])
 
 
 def commit_and_push() -> tuple[bool, str | None]:
-    status = run(["git", "status", "--short", "--", "index.html", "scripts/update_openclaw_contrib.py"]).stdout.strip()
+    managed_paths = [
+        "index.html",
+        "scripts/update_openclaw_contrib.py",
+        "scripts/test_update_openclaw_contrib.py",
+    ]
+    status = run(["git", "status", "--short", "--", *managed_paths]).stdout.strip()
     if not status:
         return False, None
-    run(["git", "add", "index.html", "scripts/update_openclaw_contrib.py"])
+    run(["git", "add", *managed_paths])
     msg = "Update OpenClaw contributor highlight"
     run(["git", "commit", "-m", msg])
     run(["git", "push", "origin", "main"])
