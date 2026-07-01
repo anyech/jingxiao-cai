@@ -19,13 +19,13 @@ class OpenClawContribUpdaterTests(unittest.TestCase):
         }
 
     def test_latest_reviewed_pr_has_public_scope_label(self) -> None:
-        pr = self.pr(84708, "fix(agents): recover message-tool mirror replay poison")
+        pr = self.pr(88159, "fix(cli): retry logs.tail after journal fallback in logs follow")
 
         rendered = updater.pr_link(pr)
 
-        self.assertIn("#84708", rendered)
-        self.assertIn("message-tool mirror replay recovery", rendered)
-        self.assertNotIn("recover message-tool mirror replay poison", html.unescape(rendered))
+        self.assertIn("#88159", rendered)
+        self.assertIn("logs-follow journal fallback retry", rendered)
+        self.assertNotIn("retry logs.tail after journal fallback", html.unescape(rendered))
 
     def test_unknown_prs_fail_closed_before_public_section_generation(self) -> None:
         unknown = self.pr(999999, "private or raw PR title should not leak")
@@ -35,12 +35,12 @@ class OpenClawContribUpdaterTests(unittest.TestCase):
             updater.pr_link(unknown)
 
     def test_build_section_uses_approved_labels_and_count(self) -> None:
-        prs = [self.pr(84708), self.pr(90487, "raw title")]
+        prs = [self.pr(88159), self.pr(90487, "raw title")]
 
         section = updater.build_section(prs)
 
         self.assertIn("Contributed 2 merged upstream PRs", section)
-        self.assertIn("message-tool mirror replay recovery", section)
+        self.assertIn("logs-follow journal fallback retry", section)
         self.assertIn("ChatGPT/Codex Responses SSE stream hardening", section)
         self.assertNotIn("raw title", section)
 
