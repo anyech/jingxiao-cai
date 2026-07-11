@@ -19,13 +19,13 @@ class OpenClawContribUpdaterTests(unittest.TestCase):
         }
 
     def test_latest_reviewed_pr_has_public_scope_label(self) -> None:
-        pr = self.pr(88159, "fix(cli): retry logs.tail after journal fallback in logs follow")
+        pr = self.pr(98021, "feat: support GPT-5.6 Ultra across OpenClaw and Codex runtimes")
 
         rendered = updater.pr_link(pr)
 
-        self.assertIn("#88159", rendered)
-        self.assertIn("logs-follow journal fallback retry", rendered)
-        self.assertNotIn("retry logs.tail after journal fallback", html.unescape(rendered))
+        self.assertIn("#98021", rendered)
+        self.assertIn("GPT-5.6 Ultra cross-runtime integration", rendered)
+        self.assertNotIn("support GPT-5.6 Ultra across OpenClaw and Codex runtimes", html.unescape(rendered))
 
     def test_unknown_prs_fail_closed_before_public_section_generation(self) -> None:
         unknown = self.pr(999999, "private or raw PR title should not leak")
@@ -35,12 +35,12 @@ class OpenClawContribUpdaterTests(unittest.TestCase):
             updater.pr_link(unknown)
 
     def test_build_section_uses_approved_labels_and_count(self) -> None:
-        prs = [self.pr(88159), self.pr(90487, "raw title")]
+        prs = [self.pr(98021), self.pr(90487, "raw title")]
 
         section = updater.build_section(prs)
 
         self.assertIn("Contributed 2 merged upstream PRs", section)
-        self.assertIn("logs-follow journal fallback retry", section)
+        self.assertIn("GPT-5.6 Ultra cross-runtime integration", section)
         self.assertIn("ChatGPT/Codex Responses SSE stream hardening", section)
         self.assertNotIn("raw title", section)
 
