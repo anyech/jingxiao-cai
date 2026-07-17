@@ -208,7 +208,7 @@ def basic_validate() -> None:
     diff_check = run(["git", "diff", "--check"])
     if diff_check.stdout.strip():
         print(diff_check.stdout, file=sys.stderr)
-    run([sys.executable, "scripts/test_update_openclaw_contrib.py"])
+    run([sys.executable, "-B", "scripts/test_update_openclaw_contrib.py"])
 
 
 def commit_and_push() -> tuple[bool, str | None]:
