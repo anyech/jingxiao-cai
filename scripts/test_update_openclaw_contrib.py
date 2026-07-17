@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import html
 import unittest
+from unittest import mock
 
 import update_openclaw_contrib as updater
 
@@ -43,6 +44,31 @@ class OpenClawContribUpdaterTests(unittest.TestCase):
         self.assertIn("GPT-5.6 Ultra cross-runtime integration", section)
         self.assertIn("ChatGPT/Codex Responses SSE stream hardening", section)
         self.assertNotIn("raw title", section)
+
+    @mock.patch.object(updater.subprocess, "run")
+    def test_sync_blog_delegates_with_bounded_freshness(self, run_mock) -> None:
+        run_mock.return_value = mock.Mock(returncode=0, stdout='{"ok": true}\n', stderr="")
+
+        coordinator = mock.Mock()
+        coordinator.is_file.return_value = True
+        coordinator.parent.parent = updater.REPO_ROOT
+        with mock.patch.object(updater, "BLOG_COORDINATOR", coordinator), mock.patch.object(
+            updater.sys.stdout,
+            "write",
+        ):
+            code = updater.delegate_public_surface_sync(
+                pull=True,
+                commit_push=True,
+                json_output=True,
+                max_age_days=30,
+            )
+
+        self.assertEqual(code, 0)
+        argv = run_mock.call_args.args[0]
+        self.assertIn("--pull", argv)
+        self.assertIn("--commit-push", argv)
+        self.assertIn("--json", argv)
+        self.assertEqual(argv[argv.index("--max-age-days") + 1], "30")
 
 
 if __name__ == "__main__":

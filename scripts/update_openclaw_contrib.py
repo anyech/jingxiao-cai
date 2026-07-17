@@ -22,6 +22,7 @@ import urllib.request
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 INDEX_HTML = REPO_ROOT / "index.html"
+BLOG_COORDINATOR = REPO_ROOT.parent / "jingxiao-cai-blog" / "scripts" / "sync-openclaw-public-surfaces.py"
 GITHUB_REPO = "openclaw/openclaw"
 GITHUB_AUTHOR = "anyech"
 CONTRIBUTORS_URL = "https://openclaws.io/contributors/"
@@ -294,12 +295,53 @@ def verify_live_site(prs: list[dict[str, str | int]]) -> dict[str, object]:
         time.sleep(LIVE_VERIFY_INTERVAL_SECONDS)
 
 
+def delegate_public_surface_sync(
+    *,
+    pull: bool,
+    commit_push: bool,
+    json_output: bool,
+    max_age_days: int,
+) -> int:
+    if not BLOG_COORDINATOR.is_file():
+        raise RuntimeError(f"blog public-surface coordinator not found: {BLOG_COORDINATOR}")
+    argv = [sys.executable, str(BLOG_COORDINATOR), "--max-age-days", str(max_age_days)]
+    if pull:
+        argv.append("--pull")
+    if commit_push:
+        argv.append("--commit-push")
+    if json_output:
+        argv.append("--json")
+    proc = subprocess.run(
+        argv,
+        cwd=BLOG_COORDINATOR.parent.parent,
+        text=True,
+        capture_output=True,
+        timeout=420,
+        check=False,
+    )
+    if proc.stdout:
+        sys.stdout.write(proc.stdout)
+    if proc.stderr:
+        sys.stderr.write(proc.stderr)
+    return proc.returncode
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--commit-push", action="store_true", help="Commit and push if index.html changes")
     parser.add_argument("--pull", action="store_true", help="Fast-forward from origin/main before updating")
     parser.add_argument("--json", action="store_true", help="Emit a compact JSON summary")
+    parser.add_argument("--sync-blog", action="store_true", help="Synchronize reviewed proof to both public sites")
+    parser.add_argument("--max-age-days", type=int, default=30, help="Maximum unchanged blog snapshot age")
     args = parser.parse_args()
+
+    if args.sync_blog:
+        return delegate_public_surface_sync(
+            pull=args.pull,
+            commit_push=args.commit_push,
+            json_output=args.json,
+            max_age_days=args.max_age_days,
+        )
 
     if args.pull:
         run(["git", "pull", "--ff-only", "origin", "main"])
