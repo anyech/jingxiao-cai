@@ -34,6 +34,7 @@ LIVE_VERIFY_INTERVAL_SECONDS = 10
 # stop automatic publishing and request review instead of falling back to raw
 # GitHub titles on the public personal site.
 KNOWN_SCOPE = {
+    131669: "cloud-worker session-tool policy enforcement",
     128078: "sqlite-vec KNN isolation and reindex safety",
     98021: "GPT-5.6 Ultra cross-runtime integration",
     88159: "logs-follow journal fallback retry",

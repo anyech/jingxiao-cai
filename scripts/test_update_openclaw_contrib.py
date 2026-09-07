@@ -20,13 +20,13 @@ class OpenClawContribUpdaterTests(unittest.TestCase):
         }
 
     def test_latest_reviewed_pr_has_public_scope_label(self) -> None:
-        pr = self.pr(128078, "fix(memory): isolate sqlite-vec KNN from the event loop")
+        pr = self.pr(131669, "fix(workers): honor session tool policies on cloud sessions")
 
         rendered = updater.pr_link(pr)
 
-        self.assertIn("#128078", rendered)
-        self.assertIn("sqlite-vec KNN isolation and reindex safety", rendered)
-        self.assertNotIn("isolate sqlite-vec KNN from the event loop", html.unescape(rendered))
+        self.assertIn("#131669", rendered)
+        self.assertIn("cloud-worker session-tool policy enforcement", rendered)
+        self.assertNotIn("honor session tool policies on cloud sessions", html.unescape(rendered))
 
     def test_unknown_prs_fail_closed_before_public_section_generation(self) -> None:
         unknown = self.pr(999999, "private or raw PR title should not leak")
