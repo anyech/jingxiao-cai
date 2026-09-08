@@ -20,13 +20,13 @@ class OpenClawContribUpdaterTests(unittest.TestCase):
         }
 
     def test_latest_reviewed_pr_has_public_scope_label(self) -> None:
-        pr = self.pr(131669, "fix(workers): honor session tool policies on cloud sessions")
+        pr = self.pr(141621, "fix(discord): preserve commentary and failed delivery progress")
 
         rendered = updater.pr_link(pr)
 
-        self.assertIn("#131669", rendered)
-        self.assertIn("cloud-worker session-tool policy enforcement", rendered)
-        self.assertNotIn("honor session tool policies on cloud sessions", html.unescape(rendered))
+        self.assertIn("#141621", rendered)
+        self.assertIn("Discord commentary delivery and failed-send progress retention", rendered)
+        self.assertNotIn("preserve commentary and failed delivery progress", html.unescape(rendered))
 
     def test_unknown_prs_fail_closed_before_public_section_generation(self) -> None:
         unknown = self.pr(999999, "private or raw PR title should not leak")
