@@ -34,6 +34,7 @@ LIVE_VERIFY_INTERVAL_SECONDS = 10
 # stop automatic publishing and request review instead of falling back to raw
 # GitHub titles on the public personal site.
 KNOWN_SCOPE = {
+    148146: "deferred handoffs from verified official channel installations",
     141626: "Skill Workshop review pause and recovery for unsupported rooted runtimes",
     143341: "installed official Discord and Slack plugin context reads",
     141592: "Responses streaming encoding defaults and header preservation",
