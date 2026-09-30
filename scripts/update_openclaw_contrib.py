@@ -34,6 +34,8 @@ LIVE_VERIFY_INTERVAL_SECONDS = 10
 # stop automatic publishing and request review instead of falling back to raw
 # GitHub titles on the public personal site.
 KNOWN_SCOPE = {
+    158473: "plugin cleanup preserves retained deleted-agent stores",
+    157994: "idle compacted sessions become eligible for cold storage",
     151133: "isolated completion quota retries on prepared backup profiles",
     150712: "native hook relay deadline enforcement for late responses",
     148146: "deferred handoffs from verified official channel installations",
