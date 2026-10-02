@@ -34,6 +34,7 @@ LIVE_VERIFY_INTERVAL_SECONDS = 10
 # stop automatic publishing and request review instead of falling back to raw
 # GitHub titles on the public personal site.
 KNOWN_SCOPE = {
+    160949: "Codex live-thread ownership across same-build module copies",
     158473: "plugin cleanup preserves retained deleted-agent stores",
     157994: "idle compacted sessions become eligible for cold storage",
     151133: "isolated completion quota retries on prepared backup profiles",
