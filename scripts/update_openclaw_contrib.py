@@ -34,6 +34,7 @@ LIVE_VERIFY_INTERVAL_SECONDS = 10
 # stop automatic publishing and request review instead of falling back to raw
 # GitHub titles on the public personal site.
 KNOWN_SCOPE = {
+    185774: "ChatGPT tool continuations omit unverifiable reasoning replay",
     164808: "start-relative recovery allowances for model retries and fallbacks",
     160949: "Codex live-thread ownership across same-build module copies",
     158473: "plugin cleanup preserves retained deleted-agent stores",
